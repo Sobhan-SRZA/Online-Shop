@@ -1,13 +1,12 @@
-import { Injectable, NotFoundException, ForbiddenException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
-import { Prisma, CartItem } from '@prisma/client';
+import { Injectable, NotFoundException, ForbiddenException, BadRequestException } from "@nestjs/common";
+import { PrismaService } from "../prisma.service";
+import { Prisma, CartItem } from "@prisma/client";
 
 @Injectable()
 export class CartService {
     constructor(private prisma: PrismaService) { }
 
     async addToCart(userId: number, productId: number, quantity: number): Promise<CartItem> {
-        // چک کردن موجودی محصول
         const product = await this.prisma.product.findUnique({ where: { id: productId } });
         if (!product) {
             throw new NotFoundException(`Product with ID ${productId} not found`);
@@ -16,7 +15,6 @@ export class CartService {
             throw new BadRequestException(`Not enough stock for product ${product.name}`);
         }
 
-        // چک کردن آیا آیتم قبلاً در سبد خرید هست
         const existingItem = await this.prisma.cartItem.findFirst({
             where: { userId, productId },
         });
@@ -40,7 +38,7 @@ export class CartService {
     async getCart(userId: number): Promise<CartItem[]> {
         return this.prisma.cartItem.findMany({
             where: { userId },
-            include: { product: true }, // اطلاعات محصول رو هم برگردون
+            include: { product: true }
         });
     }
 
@@ -50,9 +48,9 @@ export class CartService {
             throw new NotFoundException(`Cart item with ID ${cartItemId} not found`);
         }
         if (cartItem.userId !== userId) {
-            throw new ForbiddenException('You can only update your own cart items');
+            throw new ForbiddenException("You can only update your own cart items");
         }
-        const product = await this.prisma.product.findUnique({ where: { id: cartItem.productId } });
+        const product = (await this.prisma.product.findUnique({ where: { id: cartItem.productId } }))!;
         if (product.stock < quantity) {
             throw new BadRequestException(`Not enough stock for product ${product.name}`);
         }
@@ -68,7 +66,7 @@ export class CartService {
             throw new NotFoundException(`Cart item with ID ${cartItemId} not found`);
         }
         if (cartItem.userId !== userId) {
-            throw new ForbiddenException('You can only remove your own cart items');
+            throw new ForbiddenException("You can only remove your own cart items");
         }
         return this.prisma.cartItem.delete({ where: { id: cartItemId } });
     }
