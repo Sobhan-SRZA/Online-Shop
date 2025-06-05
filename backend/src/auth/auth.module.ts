@@ -1,11 +1,11 @@
-import { Module } from "@nestjs/common";
-import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
 import { PrismaService } from "../prisma.service";
-import { JwtModule } from "@nestjs/jwt";
 import { JwtStrategy } from "./jwt.strategy";
+import { AuthService } from "./auth.service";
 import { RolesGuard } from "./roles.guard";
-import { Config } from "../../../config";
+import { JwtModule } from "@nestjs/jwt";
+import { Module } from "@nestjs/common";
+import { Config } from "config";
 
 @Module({
   imports: [
