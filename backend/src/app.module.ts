@@ -7,7 +7,7 @@ import { Module } from "@nestjs/common";
 
 @Module({
   imports: [ConfigModule.forRoot(), ProductsModule, AuthModule, CartModule],
-  providers: [PrismaService],
+  providers: [PrismaService]
 })
 
 export class AppModule { }

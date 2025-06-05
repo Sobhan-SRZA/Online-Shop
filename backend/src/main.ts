@@ -12,7 +12,7 @@ async function bootstrap() {
   app.enableCors({
     origin: "http://localhost:5173", // frontend address
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
+    credentials: true
   });
 
   const config = new DocumentBuilder()

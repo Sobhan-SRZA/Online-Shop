@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "description": "A full-stack e-commerce web application inspired by Digikala, built with TypeScript, NestJS, and React. This project demonstrates modern web development practices, including RESTful API design, TypeScript integration, and database management with Prisma and SQLite. It includes core e-commerce features such as product management, user authentication, and a shopping cart.",
   "author": "Sobhan-SRZA (mr.sinre) from Persian-Caesar",
-  "private": true,
+  "private": false,
   "license": "BSD-3-Clause",
   "scripts": {
     "dev:backend": "cd backend && npm run start:dev",
     "dev:frontend": "cd frontend && npm run dev",
-    "strat:backend": "cd backend && npm run start",
-    "strat:frontend": "cd frontend && npm run build",
+    "start:backend": "cd backend && npm run start",
+    "start:frontend": "cd frontend && npm run build",
     "start:dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
-    "@nestjs/cli": "^11.0.0",
+    "@nestjs/cli": "^11.0.7",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.1",
     "@swc/cli": "^0.6.0",
@@ -69,22 +69,5 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }
